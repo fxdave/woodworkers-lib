@@ -44,6 +44,19 @@ translate([10,0,0])
 ### 3. Enjoy the results
 ![./wardrobe.png](./wardrobe.png)
 
+log:
+```log
+ECHO: "plane (left): ", "382x1164x18"
+ECHO: "plane (right): ", "382x1164x18"
+ECHO: "plane (top): ", "1000x382x18"
+ECHO: "plane (bottom): ", "1000x382x18"
+ECHO: "plane (front): ", "495x1200x18"
+ECHO: "plane (front): ", "495x1200x18"
+ECHO: "plane (back): ", "1000x1200x4"
+ECHO: "plane (bottom): ", "964x382x18"
+ECHO: "plane (bottom): ", "964x382x18"
+ECHO: "plane (bottom): ", "964x382x18"
+```
 
 ## API
 
