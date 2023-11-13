@@ -1,36 +1,43 @@
 thick=18;
+rounding=1;
 
 module planeFront(dim, l=0,r=0,t=0,b=0, ll=0,rr=0,tt=0,bb=0, thick=thick) {
     coords = __planeFront(dim, l,r,t,b, ll,rr,tt,bb, thick);
     echo("plane (front): ", coords[2]);
-    translate(coords[1]) cube(coords[0]);
+    translate(coords[1]) __rcube(coords[0]);
 }
 module planeBack(dim, l=0,r=0,t=0,b=0, ll=0,rr=0,tt=0,bb=0, thick=thick) {
     coords = __planeFront(dim, l,r,t,b, ll,rr,tt,bb, thick);
     echo("plane (back): ", coords[2]);
-    translate([0, dim[1]-thick, 0]) translate(coords[1]) cube(coords[0]);
+    translate([0, dim[1]-thick, 0]) translate(coords[1]) __rcube(coords[0]);
 }
 module planeLeft(dim, f=0,B=0,t=0,b=0, ff=0,BB=0,tt=0,bb=0, thick=thick) {
     coords = __planeLeft(dim, f,B,t,b, ff,BB,tt,bb, thick);
     echo("plane (left): ", coords[2]);
-    translate(coords[1]) cube(coords[0]);
+    translate(coords[1]) __rcube(coords[0]);
 }
 module planeRight(dim, f=0,B=0,t=0,b=0, ff=0,BB=0,tt=0,bb=0, thick=thick) {
     coords = __planeLeft(dim, f,B,t,b, ff,BB,tt,bb, thick);
     echo("plane (right): ", coords[2]);
-    translate([dim[0]-thick, 0, 0]) translate(coords[1]) cube(coords[0]);
+    translate([dim[0]-thick, 0, 0]) translate(coords[1]) __rcube(coords[0]);
 }
 module planeBottom(dim, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick) {
     coords = __planeBottom(dim, l,r,f,B, ll,rr,ff,BB, thick);
     echo("plane (bottom): ", coords[2]);
-    translate(coords[1]) cube(coords[0]);
+    translate(coords[1]) __rcube(coords[0]);
 }
 module planeTop(dim, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick) {
     coords = __planeBottom(dim, l,r,f,B, ll,rr,ff,BB, thick);
     echo("plane (top): ", coords[2]);
-    translate([0, 0, dim[2]-thick]) translate(coords[1]) cube(coords[0]);
+    translate([0, 0, dim[2]-thick]) translate(coords[1]) __rcube(coords[0]);
 }
 
+module __rcube(dim, rounding=rounding) {
+  minkowski() {
+    cube(dim-[rounding, rounding, rounding]);
+    sphere(rounding);
+  }
+}
 
 
 function __planeFront(dim, l,r,t,b, ll,rr,tt,bb, thick) = let(
