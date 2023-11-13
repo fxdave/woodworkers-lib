@@ -1,44 +1,6 @@
 thick=18;
 rounding=1;
 
-
-wardrobe=[1000,400,1200];
-
-translate([10,0,0])
-{
-    // frame
-    planeLeft(  wardrobe, f=-1, t=-1, b=-1, af=4);
-    planeRight( wardrobe, f=-1, t=-1, b=-1, af=4);
-    planeTop(   wardrobe, f=-1, af=4, al=4, ar=4);
-    planeBottom(wardrobe, f=-1, af=4, al=4, ar=4);
-
-    // seethrough doors
-    #planeFront(wardrobe, rr=-wardrobe[0]/2-1, ll=-4, al=4, at=4, ar=4, ab=4);
-    #planeFront(wardrobe, ll=-wardrobe[0]/2-1, rr=-4, al=4, at=4, ar=4, ab=4);
-
-    // fiberboard back
-    color("brown")
-    translate([0,4,0]) // I could also remove it from the sides with BB=-4, but it is a better example
-    planeBack(wardrobe, thick=4);
-
-    // shelves
-    translate([0,0,120]) 
-    planeBottom(wardrobe, l=-1, r=-1, f=-1, af=4);
-    translate([0,0,120*2]) 
-    planeBottom(wardrobe, l=-1, r=-1, f=-1, af=4);
-    translate([0,0,120*3]) 
-    planeBottom(wardrobe, l=-1, r=-1, f=-1, af=4);
-
-    // legs
-    legH=30;
-    translate([0,0,-legH]) {
-        leg(wardrobe, legH, l=2, f=3);
-        leg(wardrobe, legH, r=2, f=3);
-        leg(wardrobe, legH, l=2, B=2);
-        leg(wardrobe, legH, r=2, B=2);
-    }
-}
-
 module planeFront(
     dim,
     l=0,r=0,t=0,b=0,
