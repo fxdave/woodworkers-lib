@@ -32,10 +32,31 @@ module planeTop(dim, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick) {
     translate([0, 0, dim[2]-thick]) translate(coords[1]) __rcube(coords[0]);
 }
 
+/**
+For exmaple 4 legs:
+ leg(drawer, legHeight, l=2, f=3);
+ leg(drawer, legHeight, r=2, f=3);
+ leg(drawer, legHeight, l=2, B=2);
+ leg(drawer, legHeight, r=2, B=2);
+*/
+module leg(dim, legHeight, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick) {
+    translate([
+        if(r!=0 || rr != 0) dim[0] else 0,
+        if(B!=0 || BB != 0) dim[1] else 0,
+        0
+    ])
+    translate([
+        l*thick-r*thick-rr,
+        f*thick-B*thick-BB,
+        0
+    ])
+    cylinder(legHeight, 9.5, 19.5);
+}
+
 module __rcube(dim, rounding=rounding) {
   minkowski() {
     cube(dim-[rounding, rounding, rounding]);
-    sphere(rounding);
+    sphere(rounding/2);
   }
 }
 

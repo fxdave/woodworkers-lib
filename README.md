@@ -49,6 +49,13 @@ translate([10,0,0])
     planeBottom(wardrobe, l=-1, r=-1, f=-1);
     translate([0,0,120*3]) 
     planeBottom(wardrobe, l=-1, r=-1, f=-1);
+
+    // legs
+    legH=30;
+    leg(wardrobe, legH, l=2, f=3);
+    leg(wardrobe, legH, r=2, f=3);
+    leg(wardrobe, legH, l=2, B=2);
+    leg(wardrobe, legH, r=2, B=2);
 }
 ```
 
@@ -79,6 +86,9 @@ ECHO: "plane (bottom): ", "964x382x18"
  - `module planeRight(dim, f=0,B=0,t=0,b=0, ff=0,BB=0,tt=0,bb=0, thick=thick)`
  - `module planeBottom(dim, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick)`
  - `module planeTop(dim, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick)`
+ - `module leg(dim, legHeight, l=0,r=0,f=0,B=0,ll=0,rr=0,ff=0,BB=0, thick=thick)`
+    - Add example legs starting from z=0 to z=legHeight
+    - Here all arguments point towards the center, so you should add positive values
 
 **Thickness** is `18` by default, but you can change it with e.g.: `thick=16;`
 
