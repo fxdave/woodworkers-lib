@@ -108,16 +108,16 @@ translate([10,0,0])
 
 log:
 ```log
-ECHO: "plane (left):	18 × 378(4) × 1164"
-ECHO: "plane (right):	18 × 378(4) × 1164"
-ECHO: "plane (top):	992(4,4) × 378(4) × 18"
-ECHO: "plane (bottom):	992(4,4) × 378(4) × 18"
+ECHO: "plane (left):	18 × 378 × 1164(4)"
+ECHO: "plane (right):	18 × 378 × 1164(4)"
+ECHO: "plane (top):	992(4) × 378(4,4) × 18"
+ECHO: "plane (bottom):	992(4) × 378(4,4) × 18"
 ECHO: "plane (front):	487(4,4) × 18 × 1192(4,4)"
 ECHO: "plane (front):	487(4,4) × 18 × 1192(4,4)"
 ECHO: "plane (back):	1000 × 4 × 1200"
-ECHO: "plane (bottom):	964 × 378(4) × 18"
-ECHO: "plane (bottom):	964 × 378(4) × 18"
-ECHO: "plane (bottom):	964 × 378(4) × 18"
+ECHO: "plane (bottom):	964(4) × 378 × 18"
+ECHO: "plane (bottom):	964(4) × 378 × 18"
+ECHO: "plane (bottom):	964(4) × 378 × 18"
 ```
 
 ## API

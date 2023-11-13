@@ -120,29 +120,24 @@ module __abs(size,l,r,t,b,f,B) {
 
 function __size_with_abs_text(size,l,r,t,b,f,B) = str(
     size[0],
-    l!=0 || r!=0 ? str(
+    size[0] >= size[2] ? __abs_text(f,B) : "",
+    size[0] >= size[1] ? __abs_text(t,b) : "",
+    " ",chr(215)," ",
+    size[1],
+    size[1] >= size[2] ? __abs_text(l,r) : "",
+    size[1] >= size[0] ? __abs_text(t,b) : "",
+    " ",chr(215)," ",
+    size[2],
+    size[2] >= size[0] ? __abs_text(f,B) : "",
+    size[2] >= size[1] ? __abs_text(l,r) : ""
+);
+
+function __abs_text(l,r) = l!=0 || r!=0 ? str(
         "(",
         l!=0 ? str(l, r!=0 ? "," : "") : "",
         r!=0 ? str(r) : "",
         ")"
-    ) : "",
-    " ",chr(215)," ",
-    size[1],
-    f!=0 || B!=0 ? str(
-        "(",
-        f!=0 ? str(f, B!=0 ? "," : "") : "",
-        B!=0 ? str(B) : "",
-        ")"
-    ) : "",
-    " ",chr(215)," ",
-    size[2],
-    t!=0 || b!=0 ? str(
-        "(",
-        t!=0 ? str(t, b!=0 ? "," : "") : "",
-        b!=0 ? str(b) : "",
-        ")"
-    ) : ""
-);
+    ) : "";
 
 module __rcube(dim, rounding=rounding) {
     if(dim[0]*dim[1]*dim[2] != 0) {
