@@ -1,9 +1,18 @@
 # Woodworker's lib for OpenSCAD
 
+## Installation
+
+1. Open OpenSCAD > File > Show Library Folder
+2. Open terminal here
+3. `git clone https://github.com/fxdave/woodworkers-lib.git ./woodworkers`
+4. Use with `include<woodworkers/std.scad>`
+
 ## Tutorial
 
 ### 1. First create cubes to position and size the furnitures.
 ```scad
+include<woodworkers/std.scad>
+
 wardrobe=[1000,400,1200];
 
 translate([10,0,0])
@@ -12,6 +21,8 @@ cube(wardrobe);
 
 ### 2. Destructure the cube into planes
 ```scad
+include<woodworkers/std.scad>
+
 wardrobe=[1000,400,1200];
 
 translate([10,0,0])
