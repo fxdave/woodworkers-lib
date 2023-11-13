@@ -1,5 +1,5 @@
 thick=18;
-rounding=1;
+rounding=2;
 
 module planeFront(
     dim,
@@ -12,7 +12,7 @@ module planeFront(
     echo(str("plane (front):\t", __size_with_abs_text(coords[0], al,ar,at,ab,0,0)));
     translate(coords[1]) {
         __abs(coords[0], al,ar,at,ab,0,0);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 module planeBack(
@@ -26,7 +26,7 @@ module planeBack(
     echo(str("plane (back):\t", __size_with_abs_text(coords[0], al,ar,at,ab,0,0)));
     translate([0, dim[1]-thick, 0]) translate(coords[1]) {
         __abs(coords[0], al,ar,at,ab,0,0);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 module planeLeft(
@@ -40,7 +40,7 @@ module planeLeft(
     echo(str("plane (left):\t", __size_with_abs_text(coords[0], 0,0,at,ab,af,aB)));
     translate(coords[1]) {
         __abs(coords[0], 0,0,at,ab,af,aB);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 module planeRight(
@@ -54,7 +54,7 @@ module planeRight(
     echo(str("plane (right):\t", __size_with_abs_text(coords[0], 0,0,at,ab,af,aB)));
     translate([dim[0]-thick, 0, 0]) translate(coords[1]) {
         __abs(coords[0], 0,0,at,ab,af,aB);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 module planeBottom(
@@ -68,7 +68,7 @@ module planeBottom(
     echo(str("plane (bottom):\t", __size_with_abs_text(coords[0], al,ar,0,0,af,aB)));
     translate(coords[1]) {
         __abs(coords[0], al,ar,0,0,af,aB);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 module planeTop(
@@ -82,7 +82,7 @@ module planeTop(
     echo(str("plane (top):\t", __size_with_abs_text(coords[0], al,ar,0,0,af,aB)));
     translate([0, 0, dim[2]-thick]) translate(coords[1]) {
         __abs(coords[0], al,ar,0,0,af,aB);
-        __rcube(coords[0]);
+        cube(coords[0]);
     };
 }
 
