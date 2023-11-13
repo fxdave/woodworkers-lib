@@ -9,7 +9,7 @@ module planeFront(
     thick=thick
 ) {
     coords = __planeFront(dim, l,r,t,b, ll-al,rr-ar,tt-ar,bb-ab, thick);
-    echo(str("plane (front): ", coords[2], __abs_text(coords[0], al,ar,at,ab,0,0)));
+    echo(str("plane (front):\t", __size_with_abs_text(coords[0], al,ar,at,ab,0,0)));
     translate(coords[1]) {
         __abs(coords[0], al,ar,at,ab,0,0);
         __rcube(coords[0]);
@@ -23,7 +23,7 @@ module planeBack(
     thick=thick
 ) {
     coords = __planeFront(dim, l,r,t,b, ll-al,rr-ar,tt-at,bb-ab, thick);
-    echo(str("plane (back): ", coords[2], __abs_text(coords[0], al,ar,at,ab,0,0)));
+    echo(str("plane (back):\t", __size_with_abs_text(coords[0], al,ar,at,ab,0,0)));
     translate([0, dim[1]-thick, 0]) translate(coords[1]) {
         __abs(coords[0], al,ar,at,ab,0,0);
         __rcube(coords[0]);
@@ -37,7 +37,7 @@ module planeLeft(
     thick=thick
 ) {
     coords = __planeLeft(dim, f,B,t,b, ff-af,BB-aB,tt-at,bb-ab, thick);
-    echo(str("plane (left): ", coords[2], __abs_text(coords[0], 0,0,at,ab,af,aB)));
+    echo(str("plane (left):\t", __size_with_abs_text(coords[0], 0,0,at,ab,af,aB)));
     translate(coords[1]) {
         __abs(coords[0], 0,0,at,ab,af,aB);
         __rcube(coords[0]);
@@ -51,7 +51,7 @@ module planeRight(
     thick=thick
 ) {
     coords = __planeLeft(dim, f,B,t,b, ff-af,BB-aB,tt-at,bb-ab, thick);
-    echo(str("plane (right): ", coords[2], __abs_text(coords[0], 0,0,at,ab,af,aB)));
+    echo(str("plane (right):\t", __size_with_abs_text(coords[0], 0,0,at,ab,af,aB)));
     translate([dim[0]-thick, 0, 0]) translate(coords[1]) {
         __abs(coords[0], 0,0,at,ab,af,aB);
         __rcube(coords[0]);
@@ -65,7 +65,7 @@ module planeBottom(
     thick=thick
 ) {
     coords = __planeBottom(dim, l,r,f,B, ll-al,rr-ar,ff-af,BB-aB, thick);
-    echo(str("plane (bottom): ", coords[2], __abs_text(coords[0], al,ar,0,0,af,aB)));
+    echo(str("plane (bottom):\t", __size_with_abs_text(coords[0], al,ar,0,0,af,aB)));
     translate(coords[1]) {
         __abs(coords[0], al,ar,0,0,af,aB);
         __rcube(coords[0]);
@@ -79,7 +79,7 @@ module planeTop(
     thick=thick
 ) {
     coords = __planeBottom(dim, l,r,f,B, ll-al,rr-ar,ff-af,BB-aB, thick);
-    echo(str("plane (top): ", coords[2], __abs_text(coords[0], al,ar,0,0,af,aB)));
+    echo(str("plane (top):\t", __size_with_abs_text(coords[0], al,ar,0,0,af,aB)));
     translate([0, 0, dim[2]-thick]) translate(coords[1]) {
         __abs(coords[0], al,ar,0,0,af,aB);
         __rcube(coords[0]);
@@ -118,16 +118,31 @@ module __abs(size,l,r,t,b,f,B) {
     translate([0, 0, size[2]]) __rcube([size[0], size[1], t]);
 }
 
-function __abs_text(size,l,r,t,b,f,B) = l+r+t+b+f+B != 0 ? str(
-    " + ",
-    l!=0 ? str("l",l," ") : "",
-    r!=0 ? str("r",r," ") : "",
-    t!=0 ? str("t",t," ") : "",
-    b!=0 ? str("b",b," ") : "",
-    f!=0 ? str("f",f," ") : "",
-    B!=0 ? str("B",B," ") : "",
-    " ABS"
-) : "";
+function __size_with_abs_text(size,l,r,t,b,f,B) = str(
+    size[0],
+    l!=0 || r!=0 ? str(
+        "(",
+        l!=0 ? str(l, r!=0 ? "," : "") : "",
+        r!=0 ? str(r) : "",
+        ")"
+    ) : "",
+    " ",chr(215)," ",
+    size[1],
+    f!=0 || B!=0 ? str(
+        "(",
+        f!=0 ? str(f, B!=0 ? "," : "") : "",
+        B!=0 ? str(B) : "",
+        ")"
+    ) : "",
+    " ",chr(215)," ",
+    size[2],
+    t!=0 || b!=0 ? str(
+        "(",
+        t!=0 ? str(t, b!=0 ? "," : "") : "",
+        b!=0 ? str(b) : "",
+        ")"
+    ) : ""
+);
 
 module __rcube(dim, rounding=rounding) {
     if(dim[0]*dim[1]*dim[2] != 0) {
