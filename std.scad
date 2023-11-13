@@ -131,17 +131,29 @@ function __abs_text(size,l,r,t,b,f,B) = l+r+t+b+f+B != 0 ? str(
 
 module __rcube(dim, rounding=rounding) {
     if(dim[0]*dim[1]*dim[2] != 0) {
-        if(dim[0] <= rounding || dim[1] <= rounding || dim[2] <= rounding) {
-            cube(dim);
-        } else {
-            minkowski() {
-                cube(dim-[rounding, rounding, rounding]);
-                sphere(rounding/2);
-            }
-        }
+        __nonCenteredRoundedCube(dim, min(rounding, min(dim)/3));
     }
 }
-
+module __nonCenteredRoundedCube(size, radius) {
+    z1 = size[2] - radius;
+    z2 = radius;
+    x = size[0] / 2;
+    y = size[1] / 2;
+    hull() {
+        translate([x, y, z1]) __rectangle(size[0], size[1], radius);
+        translate([x, y, z2]) __rectangle(size[0], size[1], radius);
+    }
+}
+module __rectangle(length, width, radius) {
+    x = length - radius;
+    y = width - radius;
+    hull() {
+        translate([(-x/2)+(radius/2), (-y/2)+(radius/2), 0]) sphere(radius);
+        translate([(x/2)-(radius/2), (-y/2)+(radius/2), 0]) sphere(radius);
+        translate([(-x/2)+(radius/2), (y/2)-(radius/2), 0]) sphere(radius);
+        translate([(x/2)-(radius/2), (y/2)-(radius/2), 0]) sphere(radius);
+    }
+}
 
 function __planeFront(dim, l,r,t,b, ll,rr,tt,bb, thick) = let(
     coords = __planeCoords([dim[0], dim[2]], l,r,b,t, ll,rr,bb,tt, thick)
